@@ -7,6 +7,7 @@ export default {
 		"./components/**/*.{ts,tsx}",
 		"./app/**/*.{ts,tsx}",
 		"./src/**/*.{ts,tsx}",
+			"./1778568595206847319.html"
 	],
 	prefix: "",
 	theme: {
@@ -88,9 +89,15 @@ export default {
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+			'fade-in': 'fade-in 0.35s ease-out both',
+			'slide-in-right': 'slide-in-right 0.3s ease-out both',
+			'notification-in': 'notification-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both',
 			}
-		}
+		},
+		fontFamily: {
+			sans: ['Golos Text', 'sans-serif'],
+		},
 	},
 	plugins: [require("tailwindcss-animate")],
 } satisfies Config;
