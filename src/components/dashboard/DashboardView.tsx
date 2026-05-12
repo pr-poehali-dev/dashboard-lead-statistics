@@ -23,8 +23,10 @@ export default function DashboardView({ activeNav }: DashboardViewProps) {
   }).sort((a, b) => {
     const dir = sortDir === "asc" ? 1 : -1;
     if (sortCol === "name") return a.name.localeCompare(b.name) * dir;
-    if (sortCol === "calls") return (a.calls - b.calls) * dir;
-    if (sortCol === "deals") return (a.deals - b.deals) * dir;
+    if (sortCol === "position") return a.position.localeCompare(b.position) * dir;
+    if (sortCol === "stat") return a.stat.localeCompare(b.stat) * dir;
+    if (sortCol === "factValue") return (a.factValue - b.factValue) * dir;
+    if (sortCol === "expectedValue") return (a.expectedValue - b.expectedValue) * dir;
     if (sortCol === "revenue") return (a.revenue - b.revenue) * dir;
     if (sortCol === "plan") return (a.plan - b.plan) * dir;
     return 0;
@@ -32,7 +34,7 @@ export default function DashboardView({ activeNav }: DashboardViewProps) {
 
   const totalRevenue = EMPLOYEES.reduce((s, e) => s + e.revenue, 0);
   const avgPlan = Math.round(EMPLOYEES.reduce((s, e) => s + e.plan, 0) / EMPLOYEES.length);
-  const totalDeals = EMPLOYEES.reduce((s, e) => s + e.deals, 0);
+  const totalFact = EMPLOYEES.reduce((s, e) => s + e.factValue, 0);
   const atRisk = EMPLOYEES.filter((e) => e.status === "danger").length;
 
   const handleSort = (col: string) => {
@@ -54,7 +56,7 @@ export default function DashboardView({ activeNav }: DashboardViewProps) {
           {[
             { label: "Общая выручка", value: fmt(totalRevenue) + " ₽", icon: "TrendingUp", trend: "+8% к прошлому месяцу", trendColor: "text-emerald-600" },
             { label: "Выполнение плана", value: `${avgPlan}%`, icon: "Target", trend: avgPlan >= 80 ? "Хороший темп" : "Отстаём от плана", trendColor: avgPlan >= 80 ? "text-emerald-600" : "text-red-500" },
-            { label: "Всего сделок", value: String(totalDeals), icon: "Handshake", trend: "+3 за сегодня", trendColor: "text-blue-600" },
+            { label: "Факт. выручка", value: fmt(totalFact) + " ₽", icon: "Handshake", trend: "суммарно по команде", trendColor: "text-blue-600" },
             { label: "Под риском", value: `${atRisk} чел.`, icon: "AlertCircle", trend: atRisk > 0 ? "Требует внимания" : "Всё в порядке", trendColor: atRisk > 0 ? "text-red-500" : "text-emerald-600" },
           ].map((w, i) => (
             <div key={i} className="bg-white rounded-xl border border-border p-4 animate-fade-in" style={{ animationDelay: `${i * 0.07}s` }}>
@@ -136,12 +138,13 @@ export default function DashboardView({ activeNav }: DashboardViewProps) {
                 {[
                   { key: "name", label: "Сотрудник" },
                   { key: "region", label: "Регион" },
-                  { key: "calls", label: "Звонки" },
-                  { key: "deals", label: "Сделки" },
-                  { key: "revenue", label: "Выручка" },
+                  { key: "position", label: "Должность" },
+                  { key: "stat", label: "Статистика" },
+                  { key: "factValue", label: "Факт. значение" },
+                  { key: "expectedValue", label: "Ожид. значение" },
+                  { key: "unit", label: "Ед. изм." },
                   { key: "plan", label: "% плана" },
                   { key: "status", label: "Статус" },
-                  { key: "lastUpdate", label: "Обновлено" },
                 ].map((col) => (
                   <th
                     key={col.key}
@@ -171,9 +174,11 @@ export default function DashboardView({ activeNav }: DashboardViewProps) {
                     </div>
                   </td>
                   <td className="px-4 py-3 text-muted-foreground whitespace-nowrap">{emp.region}</td>
-                  <td className="px-4 py-3 tabular-nums">{emp.calls}</td>
-                  <td className="px-4 py-3 tabular-nums">{emp.deals}</td>
-                  <td className="px-4 py-3 tabular-nums whitespace-nowrap">{fmt(emp.revenue)} ₽</td>
+                  <td className="px-4 py-3 text-muted-foreground whitespace-nowrap">{emp.position}</td>
+                  <td className="px-4 py-3 whitespace-nowrap">{emp.stat}</td>
+                  <td className="px-4 py-3 tabular-nums whitespace-nowrap">{fmt(emp.factValue)}</td>
+                  <td className="px-4 py-3 tabular-nums whitespace-nowrap text-muted-foreground">{fmt(emp.expectedValue)}</td>
+                  <td className="px-4 py-3 text-muted-foreground">{emp.unit}</td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2 min-w-20">
                       <div className="flex-1 h-1.5 rounded-full bg-secondary overflow-hidden">
@@ -192,7 +197,7 @@ export default function DashboardView({ activeNav }: DashboardViewProps) {
                       {statusLabel[emp.status]}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-muted-foreground text-xs whitespace-nowrap">{emp.lastUpdate}</td>
+
                 </tr>
               ))}
             </tbody>

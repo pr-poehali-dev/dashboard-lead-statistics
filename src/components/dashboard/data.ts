@@ -6,13 +6,13 @@ export const MANAGER = {
 };
 
 export const EMPLOYEES = [
-  { id: 1, name: "Ирина Соколова", region: "Москва", calls: 142, deals: 23, revenue: 1_840_000, plan: 85, status: "ok", lastUpdate: "12.05.2026" },
-  { id: 2, name: "Дмитрий Волков", region: "СПб", calls: 98, deals: 14, revenue: 1_120_000, plan: 62, status: "warn", lastUpdate: "11.05.2026" },
-  { id: 3, name: "Мария Новикова", region: "Казань", calls: 167, deals: 31, revenue: 2_480_000, plan: 110, status: "ok", lastUpdate: "12.05.2026" },
-  { id: 4, name: "Алексей Морозов", region: "Екб", calls: 54, deals: 6, revenue: 480_000, plan: 28, status: "danger", lastUpdate: "09.05.2026" },
-  { id: 5, name: "Светлана Козлова", region: "Москва", calls: 121, deals: 19, revenue: 1_520_000, plan: 72, status: "warn", lastUpdate: "10.05.2026" },
-  { id: 6, name: "Павел Лебедев", region: "Новосибирск", calls: 189, deals: 38, revenue: 3_040_000, plan: 132, status: "ok", lastUpdate: "12.05.2026" },
-  { id: 7, name: "Анна Орлова", region: "СПб", calls: 76, deals: 9, revenue: 720_000, plan: 40, status: "danger", lastUpdate: "08.05.2026" },
+  { id: 1, name: "Ирина Соколова",   region: "Москва",       position: "Менеджер по продажам", stat: "Выручка",        factValue: 1_840_000, expectedValue: 2_160_000, unit: "₽",   plan: 85,  status: "ok",     revenue: 1_840_000 },
+  { id: 2, name: "Дмитрий Волков",   region: "СПб",          position: "Старший менеджер",     stat: "Выручка",        factValue: 1_120_000, expectedValue: 1_800_000, unit: "₽",   plan: 62,  status: "warn",   revenue: 1_120_000 },
+  { id: 3, name: "Мария Новикова",   region: "Казань",       position: "Менеджер по продажам", stat: "Выручка",        factValue: 2_480_000, expectedValue: 2_250_000, unit: "₽",   plan: 110, status: "ok",     revenue: 2_480_000 },
+  { id: 4, name: "Алексей Морозов",  region: "Екб",          position: "Менеджер по продажам", stat: "Выручка",        factValue: 480_000,   expectedValue: 1_700_000, unit: "₽",   plan: 28,  status: "danger", revenue: 480_000   },
+  { id: 5, name: "Светлана Козлова", region: "Москва",       position: "Ведущий менеджер",     stat: "Выручка",        factValue: 1_520_000, expectedValue: 2_100_000, unit: "₽",   plan: 72,  status: "warn",   revenue: 1_520_000 },
+  { id: 6, name: "Павел Лебедев",    region: "Новосибирск",  position: "Старший менеджер",     stat: "Выручка",        factValue: 3_040_000, expectedValue: 2_300_000, unit: "₽",   plan: 132, status: "ok",     revenue: 3_040_000 },
+  { id: 7, name: "Анна Орлова",      region: "СПб",          position: "Менеджер по продажам", stat: "Выручка",        factValue: 720_000,   expectedValue: 1_800_000, unit: "₽",   plan: 40,  status: "danger", revenue: 720_000   },
 ];
 
 export const HISTORY = [
